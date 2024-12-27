@@ -5,6 +5,7 @@ import Button from "@/components/button";
 import { Stack } from "expo-router";
 import googleLogo from "@/assets/images/google-logo.png";
 import TextInput from "@/components/text-input";
+import { signInWithGoogle } from "@/utils/lib/oauth";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -18,7 +19,7 @@ AppState.addEventListener("change", (state) => {
   }
 });
 
-export default function Auth() {
+const auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -111,18 +112,17 @@ export default function Auth() {
           icon={googleLogo}
           color="rgba(125, 110, 96, 0.17)"
           textColor="black"
-          onPress={() => signUpWithEmail()}
+          onPress={() => signInWithGoogle('google')}
         />
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 100,
     padding: 12,
-    
   },
   verticallySpaced: {
     paddingTop: 4,
@@ -149,3 +149,5 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsRegular",
   },
 });
+
+export default auth;
