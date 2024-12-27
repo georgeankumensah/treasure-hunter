@@ -1,3 +1,4 @@
+import { isLoading } from "expo-font";
 import React from "react";
 import {
   Pressable,
@@ -6,18 +7,19 @@ import {
   View,
   Image,
   ImageSourcePropType,
+  ActivityIndicator,
 } from "react-native";
 
-interface ButtonProps {
+type ButtonProps = {
   title: string;
   onPress: () => void;
-  icon?: ImageSourcePropType;
+  icon?: string & ImageSourcePropType;
   color?: string;
   textColor?: string;
   iconPosition?: "left" | "right";
   disabled?: boolean;
-}
-
+  isLoading?: boolean;
+} & React.ComponentProps<typeof Pressable> 
 export default function Button({
   title,
   onPress,
@@ -26,7 +28,18 @@ export default function Button({
   color = "#FF5A5F",
   disabled = false,
   textColor = "white",
+  isLoading = false,
 }: ButtonProps) {
+  if (isLoading) {
+    return (
+      <Pressable
+        style={[styles.button, { backgroundColor: disabled ? "gray" : color }]}
+        disabled
+      >
+        {isLoading && <ActivityIndicator color="white" />}
+      </Pressable>
+    );
+  }
   return (
     <Pressable
       style={[styles.button, { backgroundColor: disabled ? "gray" : color }]}
@@ -35,7 +48,7 @@ export default function Button({
       {icon && iconPosition === "left" && (
         <Image source={icon} style={styles.icon} />
       )}
-      <Text style={[styles.buttonText,{color:textColor}]}>{title}</Text>
+      <Text style={[styles.buttonText, { color: textColor }]}>{title}</Text>
       {icon && iconPosition === "right" && (
         <Image source={icon} style={styles.icon} />
       )}

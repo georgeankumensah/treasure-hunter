@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  View,
-  AppState,
-  TextInput,
-  Text,
-} from "react-native";
+import { Alert, StyleSheet, View, AppState, Text } from "react-native";
 import { supabase } from "@/utils/lib/supabase";
 import Button from "@/components/button";
 import { Stack } from "expo-router";
 import googleLogo from "@/assets/images/google-logo.png";
+import TextInput from "@/components/text-input";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -75,8 +69,10 @@ export default function Auth() {
         <TextInput
           onChangeText={(text) => setEmail(text)}
           value={email}
+          keyboardType="email-address"
           placeholder="email@address.com"
           autoCapitalize={"none"}
+          title="Email Address"
         />
       </View>
       <View style={styles.verticallySpaced}>
@@ -86,6 +82,7 @@ export default function Auth() {
           secureTextEntry={true}
           placeholder="Password"
           autoCapitalize={"none"}
+          title="Password"
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
@@ -125,6 +122,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 100,
     padding: 12,
+    
   },
   verticallySpaced: {
     paddingTop: 4,

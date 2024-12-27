@@ -27,9 +27,13 @@
               "pathPrefix": "/records"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
-      ]
+      ],
+      "package": "com.treasurehunt"
     },
     "web": {
       "bundler": "metro",
