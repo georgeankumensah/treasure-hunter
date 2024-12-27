@@ -1,0 +1,2 @@
+export const SUPABASE_URL="https://rctqaoaufhujxpvxmdfi.supabase.co"
+export const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjdHFhb2F1Zmh1anhwdnhtZGZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUyOTc5NzksImV4cCI6MjA1MDg3Mzk3OX0.CRNrtrD72vPO2ZzK4-dnYIq4tyivYQPaPbWDsts6RIM"
