@@ -90,16 +90,17 @@ const auth = () => {
         <Button
           title="Sign in"
           disabled={loading}
+          isLoading={loading}
           onPress={() => signInWithEmail()}
         />
       </View>
-      <View style={styles.verticallySpaced}>
+      {/* <View style={styles.verticallySpaced}>
         <Button
           title="Sign up"
           disabled={loading}
           onPress={() => signUpWithEmail()}
         />
-      </View>
+      </View> */}
       <View style={styles.separator}>
         <View style={styles.line} />
         <Text style={styles.orText}>Or login with</Text>
