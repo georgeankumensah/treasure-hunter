@@ -4,10 +4,11 @@ import React from "react";
 import { View, Text } from "react-native";
 
 export default function componentName() {
-  const text = useThemeColor({ light: "#11181C", dark: "#ECEDEE"},"text");
+  const text = useThemeColor({ light: "#11181C", dark: "#ECEDEE" }, "text");
 
-  return <Redirect href={"/auth"} />;
-  
+  return <Redirect href={"/verify-id"} />;
+  // return <Redirect href={"/upload-document"} />;
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Stack.Screen

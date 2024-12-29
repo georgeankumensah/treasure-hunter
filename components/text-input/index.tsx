@@ -11,6 +11,7 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "@/hooks/useTheme";
 
 type TextInputProps = {
   title?: string;
@@ -35,6 +36,7 @@ function TextInput({
 }: TextInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [show, setShow] = useState(true);
+  const theme = useTheme();
   const animatedValue = useRef(new Animated.Value(0)).current;
   const handleFocus = () => {
     setIsFocused(true);
@@ -63,10 +65,10 @@ function TextInput({
       inputRange: [0, 1],
       outputRange: [value !== "" ? 14 : 16, 14],
     }),
-    backgroundColor: !isFocused ? "transparent" : "white", // Replace theme.backgroundColor with a specific value
+    backgroundColor: !isFocused ? "transparent" : theme.background, // Replace theme.backgroundColor with a specific value
     color: animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [value !== "" ? "#A9A9A9" : "#000000", "#A9A9A9"], // Replace theme.Gray_color_dark and theme.textColor with specific values
+      outputRange: [value !== "" ? "#A9A9A9" : "#A9A9A9", "#A9A9A9"], // Replace theme.Gray_color_dark and theme.textColor with specific values
     }),
     paddingHorizontal: 6,
   };
@@ -82,8 +84,6 @@ function TextInput({
           flexDirection: "row",
           width: "100%",
           paddingHorizontal: 12,
-         
-
           marginTop: 15,
           alignItems: "center",
         },
@@ -92,13 +92,13 @@ function TextInput({
     >
       {title && (
         <Animated.Text
-          style={[{ color: "black" }, styles.labelStyle, labelStyle]}
+          style={[{ color: "gray" }, styles.labelStyle, labelStyle]}
         >
           {title}
         </Animated.Text>
       )}
       <NativeTextInput
-        style={[{ color: "black" }, styles.textField]}
+        style={[{ color: theme.text }, styles.textField]}
         {...otherProps}
         value={value}
         placeholder={isFocused ? placeholder : ""}

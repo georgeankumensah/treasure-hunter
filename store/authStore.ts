@@ -1,17 +1,34 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
-interface AuthState {
-    isAuthenticated: boolean;
-    user: string | null;
-    loggedIn: (user: string) => void;
-    loggedOut: () => void;
-}
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '@/utils/lib/supabase';
+
+type AuthState = {
+  session: Session | null;
+  isAuthenticated: boolean;
+  isReady: boolean;
+  initializeAuth: () => Promise<void>;
+};
 
 const useAuthStore = create<AuthState>((set) => ({
-    isAuthenticated: false,
-    user: null,
-    loggedIn: (user: string) => set({ isAuthenticated: true, user }),
-    loggedOut: () => set({ isAuthenticated: false, user: null }),
+  session: null,
+  isAuthenticated: false,
+  isReady: false,
+  initializeAuth: async () => {
+    const { data } = await supabase.auth.getSession();
+    set({
+      session: data.session,
+      isAuthenticated: !!data.session?.user,
+      isReady: true,
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      set({
+        session,
+        isAuthenticated: !!session?.user,
+      });
+    });
+  },
 }));
 
 export default useAuthStore;

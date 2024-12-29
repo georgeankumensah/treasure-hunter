@@ -14,6 +14,9 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    socialMediaButtonColor: 'rgba(125, 110, 96, 0.12)',
+    socialMediaButtonTextColor: '#11181C',
+    primary:"#11181C"
   },
   dark: {
     text: '#ECEDEE',
@@ -22,5 +25,8 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
+    socialMediaButtonColor: '#2C2F33',
+    socialMediaButtonTextColor: '#ECEDEE',
+     primary:"#FF5A5F"
   },
 };

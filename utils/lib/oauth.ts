@@ -8,7 +8,7 @@ import * as WebBrowser from "expo-web-browser";
 // WebBrowser.maybeCompleteAuthSession(); // required for web only
 const redirectTo = makeRedirectUri({
   scheme: "treasure-hunt",
-  path: "index",
+  path: "(tabs)",
 });
 
 const createSessionFromUrl = async (url: string) => {

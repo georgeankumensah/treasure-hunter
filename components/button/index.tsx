@@ -1,3 +1,4 @@
+import { useTheme } from "@/hooks/useTheme";
 import { isLoading } from "expo-font";
 import React from "react";
 import {
@@ -12,28 +13,40 @@ import {
 
 type ButtonProps = {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   icon?: string & ImageSourcePropType;
   color?: string;
   textColor?: string;
   iconPosition?: "left" | "right";
   disabled?: boolean;
   isLoading?: boolean;
-} & React.ComponentProps<typeof Pressable> 
+  type?: "social" | "default";
+} & React.ComponentProps<typeof Pressable>;
 export default function Button({
   title,
   onPress,
   icon,
   iconPosition = "left",
-  color = "#FF5A5F",
+  color,
   disabled = false,
   textColor = "white",
   isLoading = false,
+  type = "default",
 }: ButtonProps) {
+  const theme = useTheme();
   if (isLoading) {
     return (
       <Pressable
-        style={[styles.button, { backgroundColor: disabled ? "gray" : color }]}
+        style={[
+          styles.button,
+          {
+            backgroundColor: disabled
+              ? "gray"
+              : type == "social"
+              ? theme.socialMediaButtonColor
+              : theme.primary,
+          },
+        ]}
         disabled
       >
         {isLoading && <ActivityIndicator color="white" />}
@@ -42,13 +55,32 @@ export default function Button({
   }
   return (
     <Pressable
-      style={[styles.button, { backgroundColor: disabled ? "gray" : color }]}
+      style={[
+        styles.button,
+        {
+          backgroundColor: disabled
+            ? "gray"
+            : type == "social"
+            ? theme.socialMediaButtonColor
+            : theme.primary,
+        },
+      ]}
       onPress={onPress}
     >
       {icon && iconPosition === "left" && (
         <Image source={icon} style={styles.icon} />
       )}
-      <Text style={[styles.buttonText, { color: textColor }]}>{title}</Text>
+      <Text
+        style={[
+          styles.buttonText,
+          {
+            color:
+              type === "social" ? theme.socialMediaButtonTextColor : textColor,
+          },
+        ]}
+      >
+        {title}
+      </Text>
       {icon && iconPosition === "right" && (
         <Image source={icon} style={styles.icon} />
       )}
