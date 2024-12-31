@@ -143,12 +143,12 @@ const styles = StyleSheet.create({
   },
   textField: {
     flex: 1,
-    fontFamily: "regular",
+    fontFamily: "PoppinsRegular",
     fontWeight: "400",
     fontSize: 14,
   },
   labelStyle: {
-    fontFamily: "regular",
+    fontFamily: "PoppinsRegular",
     fontWeight: "400",
     fontSize: 14,
   },

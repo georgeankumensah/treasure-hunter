@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Alert, StyleSheet, View, AppState, Text } from "react-native";
 import { supabase } from "@/utils/lib/supabase";
 import Button from "@/components/button";
-import { Link, Stack } from "expo-router";
+import { Link, router, Stack } from "expo-router";
 import googleLogo from "@/assets/images/google-logo.png";
 import TextInput from "@/components/text-input";
 import { signInWithGoogle } from "@/utils/lib/oauth";
 import { useTheme } from "@/hooks/useTheme";
 import { useNotifications } from "react-native-notificated";
+import { StatusBar } from "expo-status-bar";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -45,7 +46,12 @@ const login = () => {
     });
 
     if (error) Alert.alert(error.message);
-    if (error) setLoading(false);
+    if (error) {
+      setLoading(false);
+      return;
+    }
+
+    router.navigate("/(tabs)");
   }
 
   async function signUpWithEmail() {
@@ -62,11 +68,13 @@ const login = () => {
     if (!session)
       Alert.alert("Please check your inbox for email verification!");
     setLoading(false);
+    router.navigate("/(tabs)");
   }
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Stack.Screen options={{ headerShown: false }} />
+      <StatusBar style="auto" />
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Text
           style={{

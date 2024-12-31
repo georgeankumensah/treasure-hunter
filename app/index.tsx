@@ -1,22 +1,18 @@
-import { useThemeColor } from "@/hooks/useThemeColor";
+import { Container } from "@/components/container";
+import { useAuthStore } from "@/store/authStore";
+import handleDeepLink from "@/utils/lib/handleDeepLink";
 import { Redirect, Stack } from "expo-router";
 import React from "react";
 import { View, Text } from "react-native";
 
-export default function componentName() {
-  const text = useThemeColor({ light: "#11181C", dark: "#ECEDEE" }, "text");
+export default function Splash() {
+  const session = useAuthStore((state) => state.session);
 
-  return <Redirect href={"/verify-id"} />;
-  // return <Redirect href={"/upload-document"} />;
+  handleDeepLink();
 
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Text style={{ color: text }}>Splash Screen</Text>
-    </View>
-  );
+  if (session) {
+    return <Redirect href="/(tabs)" />;
+  }
+
+  return <Redirect href="/login" />;
 }

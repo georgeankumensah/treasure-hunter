@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "treasure-hunt",
-    "slug": "treasure-hunt",
-    "scheme": "treasure-hunt",
+    "name": "tripal",
+    "slug": "tripal",
+    "scheme": "tripal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -27,13 +27,14 @@
               "pathPrefix": "/records"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
-      "package": "com.treasurehunt"
+      "package": "com.tripal.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -59,6 +60,25 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/assets/notification_icon.png",
+          "color": "#ffffff",
+          "defaultChannel": "default",
+          "sounds": [
+            "./local/assets/notification_sound.wav",
+            "./local/assets/notification_sound_other.wav"
+          ],
+          "enableBackgroundRemoteNotifications": true
+        }
       ]
     ],
     "experiments": {
@@ -70,7 +90,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "45bb1908-446b-4bb2-87db-b72572025f4f"
+        "projectId": "a0720d09-4092-4b2b-89df-5f23e0313a60"
       }
     }
   }

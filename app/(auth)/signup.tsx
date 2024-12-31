@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { supabase } from "@/utils/lib/supabase";
 import Button from "@/components/button";
-import { Link, Stack } from "expo-router";
+import { Link, router, Stack } from "expo-router";
 import googleLogo from "@/assets/images/google-logo.png";
 import TextInput from "@/components/text-input";
 import { signInWithGoogle } from "@/utils/lib/oauth";
@@ -34,6 +34,9 @@ AppState.addEventListener("change", (state) => {
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
 
@@ -46,17 +49,6 @@ const login = () => {
         description: "Wow, that was easy",
       },
     });
-
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    // if (error) Alert.alert(error.message);
-    if (error) setLoading(false);
-  }
 
   async function signUpWithEmail() {
     setLoading(true);
@@ -72,6 +64,7 @@ const login = () => {
     if (!session)
       Alert.alert("Please check your inbox for email verification!");
     setLoading(false);
+    router.push("/(tabs)");
   }
 
   return (
@@ -122,51 +115,56 @@ const login = () => {
               <View
                 style={{
                   marginTop: 20,
-                  gap:8
+                  gap: 8,
                 }}
               >
-              <TextInput
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                placeholder="First Name"
-                autoCapitalize={"none"}
-                title="First Name"
-              />
-              <TextInput
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                placeholder="Last Name"
-                autoCapitalize={"none"}
-                title="Last Name"
-              />
-              <TextInput
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                placeholder="Date of Birth"
-                autoCapitalize={"none"}
-                title="Date of Birth"
-              />
-              <TextInput
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                keyboardType="email-address"
-                placeholder="email@address.com"
-                autoCapitalize={"none"}
-                title="Email Address"
-              />
-              <TextInput
-                onChangeText={(text) => setPassword(text)}
-                value={password}
-                secureTextEntry={true}
-                placeholder="Password"
-                autoCapitalize={"none"}
-                title="Password"
-              />
+                <TextInput
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
+                  placeholder="First Name"
+                  autoCapitalize={"none"}
+                  title="First Name"
+                />
+                <TextInput
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
+                  placeholder="Last Name"
+                  autoCapitalize={"none"}
+                  title="Last Name"
+                />
+                <TextInput
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
+                  placeholder="Date of Birth"
+                  autoCapitalize={"none"}
+                  title="Date of Birth"
+                />
+                <TextInput
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
+                  keyboardType="email-address"
+                  placeholder="email@address.com"
+                  autoCapitalize={"none"}
+                  title="Email Address"
+                />
+                <TextInput
+                  onChangeText={(text) => setPassword(text)}
+                  value={password}
+                  secureTextEntry={true}
+                  placeholder="Password"
+                  autoCapitalize={"none"}
+                  title="Password"
+                />
               </View>
             </View>
-            <View style={[styles.verticallySpaced, {
-                marginTop:42
-            }]}>
+            <View
+              style={[
+                styles.verticallySpaced,
+                {
+                  marginTop: 42,
+                },
+              ]}
+            >
               <Button
                 title="Sign up"
                 disabled={loading}
